@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jenovate — Learning Platform</title>
+ <script src="jenovate.js" defer></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,450;9..144,600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#0E2038;
+    --ink:#DCEBFA;
+    --ink-soft:#9FC1E3;
+    --gold:#E0B370;
+    --sage:#8FB3A6;
+    --line:#2C4568;
+    --max:1040px;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  ::selection{background:var(--gold); color:var(--paper);}
+  a{color:inherit;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 32px;}
+
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(14,32,56,0.88);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+
+  nav.wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:68px;
+  }
+
+  .brand{
+    font-family:'Fraunces', serif;
+    font-size:19px;
+    font-weight:600;
+    text-decoration:none;
+  }
+
+  .back-link{
+    font-size:14px;
+    color:var(--ink-soft);
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    border-bottom:1px solid transparent;
+    transition:border-color 0.2s ease, color 0.2s ease;
+  }
+
+  .back-link:hover{color:var(--ink); border-color:var(--gold);}
+
+  /* ---------- PROJECT HERO ---------- */
+  .p-hero{
+    padding:64px 0 48px;
+    border-bottom:1px solid var(--line);
+  }
+
+  .kicker{
+    font-size:14px;
+    color:var(--sage);
+    font-weight:500;
+    margin-bottom:16px;
+  }
+
+  h1{
+    font-family:'Fraunces', serif;
+    font-weight:450;
+    font-size:clamp(34px, 5vw, 52px);
+    line-height:1.08;
+    letter-spacing:-0.01em;
+    max-width:18ch;
+  }
+
+  .p-sub{
+    margin-top:18px;
+    max-width:58ch;
+    font-size:17px;
+    color:var(--ink-soft);
+  }
+
+  .meta-row{
+    margin-top:40px;
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    border-top:1px solid var(--line);
+    padding-top:22px;
+    gap:20px;
+  }
+
+  .meta-row dt{
+    font-size:13px;
+    color:var(--sage);
+    margin-bottom:6px;
+  }
+
+  .meta-row dd{font-size:14.5px;}
+
+  /* ---------- IMAGE ---------- */
+  .p-image{padding:56px 0 0;}
+  .p-image figure{border:1px solid var(--line);}
+  .p-image img{width:100%; height:auto;}
+
+  .p-image figcaption{
+    font-size:13px;
+    color:var(--ink-soft);
+    padding:12px 2px 0;
+  }
+
+  /* ---------- SECTIONS ---------- */
+  section.body-section{padding:64px 0;}
+  section.body-section + section.body-section{border-top:1px solid var(--line);}
+
+  .section-head{
+    display:grid;
+    grid-template-columns:auto 1fr;
+    align-items:baseline;
+    gap:20px;
+    margin-bottom:32px;
+  }
+
+  .section-num{
+    font-family:'Fraunces', serif;
+    font-size:15px;
+    color:var(--sage);
+  }
+
+  .section-title{
+    font-family:'Fraunces', serif;
+    font-weight:450;
+    font-size:28px;
+  }
+
+  .two-col{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:48px;
+  }
+
+  .body-text p{
+    font-size:16px;
+    color:var(--ink-soft);
+    max-width:60ch;
+    margin-bottom:16px;
+  }
+
+  .feature-list{list-style:none;}
+
+  .feature-list li{
+    padding:18px 0;
+    border-top:1px solid var(--line);
+    display:grid;
+    grid-template-columns:120px 1fr;
+    gap:20px;
+  }
+
+  .feature-list li:last-child{border-bottom:1px solid var(--line);}
+  .feature-list .f-label{font-size:13px; color:var(--sage);}
+  .feature-list .f-text{font-size:15.5px; color:var(--ink-soft);}
+
+  .skills{
+    margin-top:8px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+
+  .skill{
+    font-size:13px;
+    border:1px solid var(--line);
+    padding:6px 12px;
+    color:var(--ink-soft);
+  }
+
+  .callout{
+    border-left:3px solid var(--gold);
+    padding:4px 0 4px 20px;
+    font-size:15px;
+    color:var(--ink-soft);
+    max-width:60ch;
+  }
+
+  .project-nav{
+    padding:56px 0 80px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+
+  .project-nav a{
+    text-decoration:none;
+    font-size:14.5px;
+    color:var(--ink-soft);
+    border-bottom:1px solid transparent;
+    transition:border-color 0.2s ease, color 0.2s ease;
+  }
+
+  .project-nav a:hover{
+    color:var(--ink);
+    border-color:var(--gold);
+  }
+
+  footer{
+    padding:28px 0 40px;
+    font-size:13px;
+    color:var(--ink-soft);
+    display:flex;
+    justify-content:space-between;
+    border-top:1px solid var(--line);
+  }
+
+  @media (max-width:760px){
+    .two-col{grid-template-columns:1fr;}
+    .meta-row{grid-template-columns:1fr 1fr;}
+    .feature-list li{grid-template-columns:1fr; gap:6px;}
+  }
+  .media-swap{
+  position:relative;
+  width:100%;
+  cursor:pointer;
+}
+
+.media-swap img{
+  width:100%;
+  display:block;
+}
+
+.play-badge{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+
+  width:70px;
+  height:70px;
+  border-radius:50%;
+
+  background:var(--gold);
+  color:var(--paper);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:24px;
+  cursor:pointer;
+  z-index:5;
+
+  box-shadow:0 4px 20px rgba(0,0,0,0.35);
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <nav class="wrap">
+    <a class="brand" href="portfolio.html">Abhijeet Singh</a>
+    <a class="back-link" href="portfolio.html#work">&larr; Back to work</a>
+  </nav>
+</header>
+
+<section class="p-hero">
+  <div class="wrap">
+    <div class="kicker">Ed-tech / Learning platform</div>
+    <h1>Jenovate</h1>
+    <p class="p-sub">A student-first learning platform for Gen Z, built to close the gap between academic learning and real-world, career-ready skill.</p>
+
+    <dl class="meta-row">
+      <div><dt>Role</dt><dd>Frontend Developer</dd></div>
+      <div><dt>Stack</dt><dd>HTML, CSS, JavaScript, REST API</dd></div>
+      <div><dt>Duration</dt><dd>2025</dd></div>
+      <div><dt>Status</dt><dd>Live / In progress</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="p-image">
+  <div class="wrap">
+    <figure>
+      <div class="media-swap" id="mediaSwap">
+        <img 
+          id="projectImg" 
+          src="jenovate-image.png" 
+          alt="Jenovate learning platform interface"
+          onclick="playProjectVideo()"
+        >
+
+        <div class="play-badge" onclick="playProjectVideo()">▶</div>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<section class="body-section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2 class="section-title">The problem</h2>
+    </div>
+
+    <div class="two-col">
+      <div class="body-text">
+        <p>Students often work hard in school but still struggle to connect what they're learning to real career confidence. Course content and certificates alone don't close that gap.</p>
+        <p>Jenovate was built around practical learning, guided mentorship, and projects that let learners prove what they can actually do — not just what they've studied.</p>
+      </div>
+
+      <div class="body-text">
+        <p class="callout">Goal: give students structured, mentor-guided paths that build portfolio-ready skills, not just completion certificates.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="body-section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2 class="section-title">What the platform offers</h2>
+    </div>
+
+    <ul class="feature-list">
+      <li>
+        <span class="f-label">Learning paths</span>
+        <span class="f-text">Structured courses built around real skills, projects, and mentor guidance rather than passive content delivery.</span>
+      </li>
+
+      <li>
+        <span class="f-label">Mentorship</span>
+        <span class="f-text">Direct access to experienced industry professionals who share practical, career-ready insight.</span>
+      </li>
+
+      <li>
+        <span class="f-label">Projects</span>
+        <span class="f-text">Industry-focused project work that strengthens a learner's portfolio and shows recruiters real, applied skill.</span>
+      </li>
+
+      <li>
+        <span class="f-label">Simulations</span>
+        <span class="f-text">Interactive workplace scenarios that build practical experience before students step into a real job.</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="body-section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <h2 class="section-title">My contribution</h2>
+    </div>
+
+    <div class="two-col">
+      <div class="body-text">
+        <p>I worked on the frontend experience of the Jenovate learning platform, focusing on a clean interface that makes learning resources and platform content easy to explore.</p>
+      </div>
+
+      <div class="body-text">
+        <p>I also worked with JavaScript and REST API integration to make the platform more interactive and connect the frontend with dynamic data.</p>
+      </div>
+    </div>
+
+    <div class="skills">
+      <span class="skill">HTML</span>
+      <span class="skill">CSS3</span>
+      <span class="skill">JavaScript</span>
+      <span class="skill">REST API</span>
+    </div>
+  </div>
+</section>
+
+<section class="body-section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <h2 class="section-title">What's next</h2>
+    </div>
+
+    <div class="two-col">
+      <div class="body-text">
+        <p>Future improvements could include richer learner dashboards, progress tracking, personalized learning paths, and stronger project-based learning flows.</p>
+      </div>
+
+      <div class="body-text">
+        <p>The next focus is making the platform more scalable and improving the overall experience for students as they move from learning to building portfolio-ready projects.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap project-nav">
+  <a href="portfolio.html#work">&larr; All projects</a>
+  <a href="portfolio.html#contact">Get in touch &rarr;</a>
+</div>
+
+</body>
+</html>
